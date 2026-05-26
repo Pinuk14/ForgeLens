@@ -10,7 +10,7 @@ from albumentations.pytorch import ToTensorV2
 # RGB branch augmentations
 rgb_transform = A.Compose(
     [
-        A.RandomResizedCrop(height=224, width=224, scale=(0.8, 1.0)),
+        A.RandomResizedCrop(size=(224, 224), scale=(0.8, 1.0)),
         A.HorizontalFlip(p=0.5),
         A.ColorJitter(
             brightness=0.2,
@@ -19,7 +19,7 @@ rgb_transform = A.Compose(
             hue=0.05,
             p=0.4,
         ),
-        A.GaussNoise(var_limit=(5, 20), p=0.2),
+        A.GaussNoise(std_range=(0.008, 0.018), p=0.2),
         A.Normalize(
             mean=[0.485, 0.456, 0.406],
             std=[0.229, 0.224, 0.225],
